@@ -18,7 +18,7 @@ export const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
     );
   }
 
-  const { array, left, right, currentSum, bestResult, explanation } = currentStep;
+  const { array, left, right, mid, currentSum, bestResult, explanation } = currentStep;
 
   return (
     <div className="space-y-8">
@@ -27,6 +27,7 @@ export const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
           {array.map((val, idx) => {
             const isLeft = left === idx;
             const isRight = right === idx;
+            const isMid = mid === idx;
             const isInWindow = left !== undefined && right !== undefined && idx >= left && idx <= right;
 
             return (
@@ -34,14 +35,20 @@ export const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
                 <div className="relative">
                   <ArrayBlock
                     value={val}
-                    isActive={isLeft || isRight}
+                    isActive={isLeft || isRight || isMid}
                     isHighlighted={isInWindow}
                   />
-                  {(isLeft || isRight) && (
+                  {(isLeft || isRight || isMid) && (
                     <div className="absolute -top-10 left-1/2 -translate-x-1/2">
                       <Pointer
-                        label={isLeft && isRight ? 'L/R' : isLeft ? 'L' : 'R'}
-                        colorClass={isLeft && isRight ? 'text-purple-500' : isLeft ? 'text-blue-500' : 'text-red-500'}
+                        label={
+                          [
+                            isLeft ? 'L' : null,
+                            isMid ? 'M' : null,
+                            isRight ? 'R' : null
+                          ].filter(Boolean).join('/')
+                        }
+                        colorClass={isMid ? 'text-purple-500' : isLeft ? 'text-blue-500' : 'text-red-500'}
                       />
                     </div>
                   )}
@@ -55,13 +62,13 @@ export const VisualizationPanel: React.FC<VisualizationPanelProps> = ({
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div className="p-4 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800">
-          <span className="block text-xs font-semibold uppercase text-blue-600 dark:text-blue-400">Current Sum / Value</span>
+          <span className="block text-xs font-semibold uppercase text-blue-600 dark:text-blue-400">Current Value / Sum</span>
           <span className="text-2xl font-bold text-blue-700 dark:text-blue-300">
             {currentSum !== undefined ? currentSum : '—'}
           </span>
         </div>
         <div className="p-4 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-100 dark:border-green-800">
-          <span className="block text-xs font-semibold uppercase text-green-600 dark:text-green-400">Best Result / Found</span>
+          <span className="block text-xs font-semibold uppercase text-green-600 dark:text-green-400">Result / Index</span>
           <span className="text-2xl font-bold text-green-700 dark:text-green-300">
             {bestResult !== undefined ? bestResult : '—'}
           </span>

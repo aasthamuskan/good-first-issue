@@ -35,4 +35,16 @@ export const COMPLEXITY_DATA = {
       invariant: 'P[i] = A[0] + ... + A[i]. Range sum [L, R] = P[R] - P[L-1].',
     },
   },
+  BINARY_SEARCH: {
+    BRUTE_FORCE: {
+      time: 'O(N)',
+      space: 'O(1)',
+      invariant: 'Check every element one by one until target is found.',
+    },
+    OPTIMIZED: {
+      time: 'O(log N)',
+      space: 'O(1)',
+      invariant: 'The target must lie within the current search range [left, right] if it exists.',
+    },
+  },
 };

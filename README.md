@@ -9,6 +9,7 @@ A production-ready React + TypeScript application for visualizing Data Structure
   - **Sliding Window**: Fixed-size window maximum sum subarray.
   - **Two Pointers**: Target sum search on sorted arrays.
   - **Prefix Sum**: Range sum query precomputation.
+  - **Binary Search**: Efficient search in sorted arrays.
 - **Dual Implementations**: Switch between **Brute Force** and **Optimized** versions for each pattern.
 - **Dark Mode**: Fully themed for better accessibility and developer experience.
 - **Control Engine**: Play, pause, step forward/backward, and adjust playback speed.
@@ -76,9 +77,9 @@ npm test
 
 ## 🧩 Extending the Application
 
-To add a new pattern (e.g., Binary Search):
+To add a new pattern (e.g., Graph BFS):
 
-1.  **Define Logic**: Create `src/algorithms/binarySearch.ts`. Implement brute force and optimized versions returning `Step[]`.
+1.  **Define Logic**: Create `src/algorithms/graphBFS.ts`. Implement brute force and optimized versions returning `Step[]`.
 2.  **Register Pattern**: Add the new pattern type to `src/algorithms/stepGenerator.ts` and update the `generateSteps` function.
 3.  **Add Metadata**: Update `src/constants/patterns.ts` and `src/constants/complexity.ts` with the new pattern's details and code snippets.
 4.  **Update UI**: The `Header` and `InputPanel` will automatically adapt to include the new pattern if added to the constants.

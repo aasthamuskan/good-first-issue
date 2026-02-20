@@ -2,8 +2,10 @@ export type Step = {
   array: number[]
   left?: number
   right?: number
+  mid?: number
   currentSum?: number
   bestResult?: number
+  target?: number
   explanation?: string
 }
 

@@ -19,6 +19,7 @@ export const Header: React.FC<HeaderProps> = ({
     { value: 'SLIDING_WINDOW', label: 'Sliding Window' },
     { value: 'TWO_POINTERS', label: 'Two Pointers' },
     { value: 'PREFIX_SUM', label: 'Prefix Sum' },
+    { value: 'BINARY_SEARCH', label: 'Binary Search' },
   ];
 
   return (

@@ -55,4 +55,22 @@ prefix[0] = array[0];
 }
 <span class="text-blue-400">return</span> prefix[target];`,
   },
+  BINARY_SEARCH: {
+    title: 'Binary Search',
+    description: 'Binary Search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing in half the portion of the list that could contain the item.',
+    bruteForceCode: `
+<span class="text-blue-400">for</span> (<span class="text-blue-400">let</span> i = 0; i &lt; n; i++) {
+  <span class="text-blue-400">if</span> (array[i] === target) <span class="text-blue-400">return</span> i;
+}
+<span class="text-blue-400">return</span> -1;`,
+    optimizedCode: `
+<span class="text-blue-400">let</span> left = 0, right = n - 1;
+<span class="text-blue-400">while</span> (left &lt;= right) {
+  <span class="text-blue-400">const</span> mid = Math.floor((left + right) / 2);
+  <span class="text-blue-400">if</span> (array[mid] === target) <span class="text-blue-400">return</span> mid;
+  <span class="text-blue-400">if</span> (array[mid] &lt; target) left = mid + 1;
+  <span class="text-blue-400">else</span> right = mid - 1;
+}
+<span class="text-blue-400">return</span> -1;`,
+  },
 };
