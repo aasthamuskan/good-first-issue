@@ -1,35 +1,89 @@
-<p align="center">
-  <a href="https://goodfirstissue.dev" target="_blank">
-    <img src="public/readme-logo.svg">
-  </a>
-</p>
-<hr>
+# DSA Pattern Visualizer
 
-Welcome! 👋🏼
+A production-ready React + TypeScript application for visualizing Data Structures and Algorithms (DSA) patterns step-by-step.
 
-**Good First Issue** is an initiative to curate easy pickings from popular projects, so developers who've never contributed to open-source can get started quickly.
+## 🚀 Features
 
-Open-source maintainers are always looking to get more people involved, but new developers generally think it's challenging to become a contributor. We believe getting developers to fix super-easy issues removes the barrier for future contributions. This is why Good First Issue exists.
+- **Interactive Visualization**: Watch algorithms execute step-by-step with animated array blocks and pointers.
+- **Pattern Support**:
+  - **Sliding Window**: Fixed-size window maximum sum subarray.
+  - **Two Pointers**: Target sum search on sorted arrays.
+  - **Prefix Sum**: Range sum query precomputation.
+  - **Binary Search**: Efficient search in sorted arrays.
+- **Dual Implementations**: Switch between **Brute Force** and **Optimized** versions for each pattern.
+- **Dark Mode**: Fully themed for better accessibility and developer experience.
+- **Control Engine**: Play, pause, step forward/backward, and adjust playback speed.
 
-## Adding a new project
+## 🏗️ Architecture
 
-You're welcome to add a new project to Good First Issue, and we encourage all projects &mdash; old and new, big and small.
+The application follows a strict separation of concerns to ensure scalability and maintainability.
 
-**[Submit your repository via this form](https://docs.google.com/forms/d/e/1FAIpQLSfHSt8UHvACokWv8uwiImidTIhuSCAUXnvSGs-TULshdLl9Qw/viewform?usp=header)**
+### Layers
 
-To maintain the quality of projects in Good First Issue, please make sure your GitHub repository meets the following criteria:
+1.  **Algorithm Layer (`src/algorithms/`)**: Pure TypeScript logic. Algorithms are deterministic generators that return an array of `Step` objects.
+2.  **Engine Layer (`src/engine/`)**: A custom React hook (`useVisualizerEngine`) and a Reducer that manage the state of the visualization (current index, playback, speed).
+3.  **UI Layer (`src/components/`)**: React components that render based on the current step state. No algorithm logic resides here.
+4.  **Constants & Utils**: Metadata about patterns, complexity data, and shared utility functions.
 
-| Requirement | Description |
-|-------------|-------------|
-| Good First Issues | At least 3 open issues with beginner-friendly labels (`good first issue`, `beginner`, `easy`, `help wanted`, etc.) |
-| Contributors | At least 10 contributors |
-| README.md | Detailed setup instructions |
-| CONTRIBUTING.md | Guidelines for new contributors |
-| Active Maintenance | Recent commits and activity |
-| License | Valid open source license |
+### Data Flow
 
-Once your submission is reviewed and approved, it will be added to [goodfirstissue.dev](https://goodfirstissue.dev/).
+```mermaid
+graph TD
+    A[Input Panel] -->|Params| B[Algorithm Logic]
+    B -->|Step[]| C[Visualization Engine]
+    C -->|Current Step| D[Visualization Panel]
+    C -->|Derived State| E[Control Panel]
+    F[Pattern Selector] -->|Pattern Type| B
+    G[Mode Toggle] -->|Brute/Optimized| B
+```
 
-## Contributing
+1.  **Initialization**: The user selects a pattern and algorithm mode.
+2.  **Execution**: On "Run", the Algorithm Logic generates a static `Step[]` array.
+3.  **Consumption**: The `Step[]` is passed to the Visualization Engine.
+4.  **Rendering**: The Engine maintains a pointer to the current step. The UI components subscribe to the Engine's state and render the visual representation.
 
-Want to contribute? See [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions and guidelines.
+## 🛠️ Tech Stack
+
+- **Framework**: React 18 (Vite)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Testing**: Jest + TS-Jest
+
+## 🚦 Getting Started
+
+### Prerequisites
+
+- Node.js (v18+)
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Running the App
+
+```bash
+npm run dev
+```
+
+### Running Tests
+
+```bash
+npm test
+```
+
+## 🧩 Extending the Application
+
+To add a new pattern (e.g., Graph BFS):
+
+1.  **Define Logic**: Create `src/algorithms/graphBFS.ts`. Implement brute force and optimized versions returning `Step[]`.
+2.  **Register Pattern**: Add the new pattern type to `src/algorithms/stepGenerator.ts` and update the `generateSteps` function.
+3.  **Add Metadata**: Update `src/constants/patterns.ts` and `src/constants/complexity.ts` with the new pattern's details and code snippets.
+4.  **Update UI**: The `Header` and `InputPanel` will automatically adapt to include the new pattern if added to the constants.
+
+---
+
+Built with ❤️ for algorithm enthusiasts.

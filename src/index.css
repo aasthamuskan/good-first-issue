@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 transition-colors duration-200;
+  }
+
+  body.dark {
+    @apply bg-slate-950 text-slate-50;
+  }
+}
+
+.visualization-container {
+  @apply relative flex items-end justify-center h-64 gap-2 px-4 py-8 overflow-x-auto bg-white border rounded-lg shadow-inner dark:bg-slate-900 dark:border-slate-800;
+}
